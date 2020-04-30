@@ -1,39 +1,87 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-    /*
-    Make a Todo List
-
-    0. Make it so that after entering the task description, in the text field and clicking the "Add Task" button, a new task appears inside the element with the id todo-list.
-    1. the ability to remove tasks (add an x button)
-    2. the ability to check off tasks - strikes them out wo removing (add a checkbox)
-    3. the ability to delete a task
-    4. the ability to edit an existing task
-
-    */
-    </script>
     <style>
-    #wrapper {
-      max-width: 480px;
-      margin: auto;
-    }
+      #wrapper {
+        max-width: 480px;
+        margin: auto;
+      }
 
-    #description, #search, #todo-list {
-      font-size: 1.5em;
-    }
+      #description,
+      #search,
+      #todo-list {
+        font-size: 1.5em;
+      }
+      .strike {
+        text-decoration: line-through;
+      }
+      input[type='checkbox'] {
+        font-size: 1.5em;
+        display: inline-block;
+        width: 0.6em;
+        height: 0.6em;
+      }
+      button {
+        font-size: 1em;
+      }
     </style>
+    <script>
+      /*
+      Make a Todo List
+
+      0. Make it so that after entering the task description, in the text field and clicking the "Add Task" button, a new task appears inside the element with the id todo-list.
+      1. the ability to remove tasks (add an x button)
+      2. the ability to check off tasks - strikes them out wo removing (add a checkbox)
+      3. the ability to delete a task
+      4. the ability to edit an existing task
+
+      */
+      $(function () {
+        const $button = $('#add-button');
+        const $input = $('#description');
+        const $list = $('#todo-list');
+
+        $button.click(function () {
+          if ($input.val()) {
+            const $todoItem = $(`
+              <li>
+                <label class="text">${$input.val()}</label>
+                <input type="checkbox" name="checkbox">
+                <button class="delete">🗑</button>
+                <button class="edit">📝</button>
+              </li>
+            `);
+            $list.append($todoItem);
+            $input.val('');
+          }
+        });
+
+        $(document).on('click', 'input[type="checkbox"]', function () {
+          if ($(this).is(':checked')) {
+            $(this).siblings('label').addClass('strike');
+          } else {
+            $(this).siblings('label').removeClass('strike');
+          }
+        });
+        $(document).on('click', '.delete', function () {
+          $(this).closest('li').remove();
+        });
+        $(document).on('click', '.edit', function () {
+          const $todoLabel = $(this).siblings('label').first();
+          const newValue = prompt('Edit Todo Item', $todoLabel.text());
+          $todoLabel.text(newValue);
+        });
+      });
+    </script>
   </head>
   <body>
     <div id="wrapper">
-      <input id="description" type="text" name="description">
+      <input id="description" type="text" name="description" />
       <button id="add-button">Add Task</button>
-      <ul id="todo-list">
-        <li>Feed the cat</li>
-      </ul>
+      <ul id="todo-list"></ul>
     </div>
   </body>
 </html>
