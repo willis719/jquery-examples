@@ -3,47 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <title></title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style>
-      #wrapper {
-        max-width: 480px;
-        margin: auto;
-      }
-
-      #description,
-      #search,
-      #todo-list {
-        font-size: 1.5em;
-      }
-      .strike {
-        text-decoration: line-through;
-      }
-      input[type='checkbox'] {
-        font-size: 1.5em;
-        display: inline-block;
-        width: 0.6em;
-        height: 0.6em;
-      }
-      button {
-        font-size: 1em;
-      }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
       /*
       Make a Todo List
 
       0. Make it so that after entering the task description, in the text field and clicking the "Add Task" button, a new task appears inside the element with the id todo-list.
-      1. the ability to remove tasks (add an x button)
-      2. the ability to check off tasks - strikes them out wo removing (add a checkbox)
-      3. the ability to delete a task
-      4. the ability to edit an existing task
-
+      1. Add the ability to remove tasks (add an x button)
+      2. Add the ability to check off tasks (add a checkbox that changes the style of the list item)
+      3. Add the ability to edit an existing task (add an edit button that enables a text input, and a save button to confirm)
       */
       $(function () {
         const $button = $('#add-button');
         const $input = $('#description');
         const $list = $('#todo-list');
-
         $button.click(function () {
           if ($input.val()) {
             const $todoItem = $(`
@@ -76,6 +49,31 @@
         });
       });
     </script>
+    
+    <style>
+      #wrapper {
+        max-width: 480px;
+        margin: auto;
+      }
+
+      #description,
+      #search,
+      #todo-list {
+        font-size: 1.5em;
+      }
+      .strike {
+        text-decoration: line-through;
+      }
+      input[type='checkbox'] {
+        font-size: 1.5em;
+        display: inline-block;
+        width: 0.6em;
+        height: 0.6em;
+      }
+      button {
+        font-size: 1em;
+      }
+    </style>
   </head>
   <body>
     <div id="wrapper">
