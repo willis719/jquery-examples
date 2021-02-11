@@ -10,8 +10,24 @@
     When the save button is clicked, take the text value inside the text field, and append a new <li> element to the #log with the entered text value.
     HINT: lookup .val()
     */
-    $(function () {
+    $(document).ready(function () {
       // write your code here
+      const $input = $("#text-field");
+      const $clearButton = $("#clear-button");
+      const $saveButton = $("#save-button");
+      const $unordered = $("#log");
+      
+      $clearButton.on("click", () => {
+        $input.val("");
+      })
+
+
+      $saveButton.on("click", () => {
+        const $li = $("<li>", {
+          text: $input.val()
+        })
+        $unordered.append($li)
+      })
     });
     </script>
   </head>
